@@ -251,6 +251,7 @@ const Chat = () => {
               maxHeight: "500px",
               overflowY: "auto",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              height: "415px",
             }}
           >
             <Box
@@ -295,7 +296,7 @@ const Chat = () => {
                 color: "#fff",
                 padding: "5px 10px",
                 borderRadius: "8px",
-                marginTop: "379px", // Separación para que no se pegue al final de la lista
+                marginTop: "304px", // Separación para que no se pegue al final de la lista
                 textAlign: "center",
                 fontSize: "16px",
                 fontWeight: "bold",
