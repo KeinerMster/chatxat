@@ -18,11 +18,12 @@ const Chat = () => {
   // Función para manejar la selección de emojis
   const handleEmojiClick = (event, emojiObject) => {
     setMessage(message + emojiObject.emoji);
-    setShowEmojiPicker(false);
+    setShowEmojiPicker(false); // Ocultar el emoji picker después de seleccionar
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: "600px", margin: "0 auto", padding: "20px", backgroundColor: "#f4f4f9", borderRadius: "8px" }}>
+    <Box sx={{ width: "100%", maxWidth: "600px", margin: "0 auto", padding: "20px", backgroundColor: "#f4f4f9", borderRadius: "8px", position: "relative" }}>
+      {/* Caja de mensajes */}
       <Box sx={{ height: "400px", overflowY: "scroll", marginBottom: "20px", padding: "10px", backgroundColor: "#fff", borderRadius: "8px" }}>
         {messages.map((msg, index) => (
           <Box key={index} sx={{ padding: "8px", marginBottom: "10px", backgroundColor: "#e1e1e1", borderRadius: "12px" }}>
@@ -31,6 +32,7 @@ const Chat = () => {
         ))}
       </Box>
 
+      {/* Caja de entrada de mensaje y botones */}
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <TextField
           variant="outlined"
@@ -47,8 +49,9 @@ const Chat = () => {
         </IconButton>
       </Box>
 
+      {/* Emoji Picker, se posiciona por encima del chat */}
       {showEmojiPicker && (
-        <Box sx={{ position: "absolute", bottom: "100px", left: "50%", transform: "translateX(-50%)" }}>
+        <Box sx={{ position: "absolute", bottom: "80px", left: "50%", transform: "translateX(-50%)", zIndex: 1 }}>
           <EmojiPicker onEmojiClick={handleEmojiClick} />
         </Box>
       )}
