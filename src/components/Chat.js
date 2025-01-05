@@ -62,6 +62,13 @@ const Chat = () => {
     navigator.clipboard.writeText(text);
   };
 
+  const handleLogout = () => {
+    setHasJoined(false);
+    setUsers([]);
+    setMessages([]);
+    setUsername("");
+  };
+
   return (
     <Box
       sx={{
@@ -81,7 +88,7 @@ const Chat = () => {
         sx={{
           marginBottom: "20px",
           fontWeight: "bold",
-          color: "#3f51b5",
+          color: "#000000",
           marginTop: "20px",
           textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
         }}
@@ -141,7 +148,7 @@ const Chat = () => {
             maxWidth: "900px",
             height: "500px",
             marginTop: "20px",
-            padding: "0",
+            padding: "16px", // Padding uniforme en todos los lados
             backgroundColor: "transparent",
             borderRadius: "12px",
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
@@ -190,6 +197,27 @@ const Chat = () => {
                   <strong>{msg.user}:</strong> {msg.text}
                 </Box>
               ))}
+            </Box>
+
+            {/* Contenedor de los botones */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between", // Espacio entre los botones
+                marginY: "16px", // Margen vertical
+              }}
+            >
+              <Button variant="contained" color="primary" sx={{ flex: 1 }}>
+                Registro
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ flex: 1 }}
+                onClick={handleLogout}
+              >
+                Salir
+              </Button>
             </Box>
 
             <Box
@@ -245,13 +273,13 @@ const Chat = () => {
           <Box
             sx={{
               width: "30%",
+			  height: "493px",
               padding: "5px",
               backgroundColor: "#fff",
               borderRadius: "12px",
               maxHeight: "500px",
               overflowY: "auto",
               boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              height: "415px",
             }}
           >
             <Box
@@ -296,7 +324,7 @@ const Chat = () => {
                 color: "#fff",
                 padding: "5px 10px",
                 borderRadius: "8px",
-                marginTop: "304px", // Separación para que no se pegue al final de la lista
+                marginTop: "375px", // Separación para que no se pegue al final de la lista
                 textAlign: "center",
                 fontSize: "16px",
                 fontWeight: "bold",
