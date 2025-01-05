@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, IconButton, Typography, Button } from "@mui/material";
+import { Box, TextField, IconButton, Typography, Button, Avatar } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import Picker from "emoji-picker-react";
 
@@ -9,19 +9,20 @@ const Chat = () => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Estado del emoji picker
   const [users, setUsers] = useState([]); // Estado que guarda los usuarios conectados
   const [username, setUsername] = useState(""); // Estado para guardar el nombre de usuario
+  const [avatar, setAvatar] = useState(""); // Estado para la URL de la foto de perfil
   const [hasJoined, setHasJoined] = useState(false); // Estado que indica si el usuario ha ingresado al chat
 
   const joinChat = () => {
-    if (username.trim() !== "") {
-      setUsers((prevUsers) => [...prevUsers, username]);
+    if (username.trim() !== "" && avatar.trim() !== "") {
+      setUsers((prevUsers) => [...prevUsers, { username, avatar }]);
       setHasJoined(true);
     }
   };
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      if (username && users.includes(username)) {
-        setUsers((prevUsers) => prevUsers.filter((user) => user !== username));
+      if (username && users.some((user) => user.username === username)) {
+        setUsers((prevUsers) => prevUsers.filter((user) => user.username !== username));
       }
     };
 
@@ -52,7 +53,7 @@ const Chat = () => {
 
   const sendMessage = () => {
     if (message.trim() !== "") {
-      const newMessage = { user: username, text: message };
+      const newMessage = { user: username, text: message, avatar };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setMessage("");
     }
@@ -67,6 +68,7 @@ const Chat = () => {
     setUsers([]);
     setMessages([]);
     setUsername("");
+    setAvatar("");
   };
 
   return (
@@ -117,6 +119,17 @@ const Chat = () => {
             fullWidth
             onChange={(e) => setUsername(e.target.value)}
             value={username}
+            sx={{
+              marginBottom: "15px",
+              borderRadius: "8px",
+            }}
+          />
+          <TextField
+            label="URL de tu foto de perfil"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setAvatar(e.target.value)}
+            value={avatar}
             sx={{
               marginBottom: "15px",
               borderRadius: "8px",
@@ -185,6 +198,8 @@ const Chat = () => {
                     handleCopy(`${msg.user}: ${msg.text}`)
                   }
                   sx={{
+                    display: "flex",
+                    alignItems: "center",
                     padding: "8px",
                     marginBottom: "5px",
                     backgroundColor: "#f1f1f1",
@@ -194,7 +209,14 @@ const Chat = () => {
                     userSelect: "text",
                   }}
                 >
-                  <strong>{msg.user}:</strong> {msg.text}
+                  <Avatar
+                    src={msg.avatar}
+                    alt={msg.user}
+                    sx={{ marginRight: "10px" }}
+                  />
+                  <Typography variant="body1">
+                    <strong>{msg.user}:</strong> {msg.text}
+                  </Typography>
                 </Box>
               ))}
             </Box>
@@ -273,7 +295,7 @@ const Chat = () => {
           <Box
             sx={{
               width: "30%",
-			  height: "493px",
+              height: "493px",
               padding: "5px",
               backgroundColor: "#fff",
               borderRadius: "12px",
@@ -311,7 +333,7 @@ const Chat = () => {
                     }}
                     tabIndex={-1}
                   >
-                    {user}
+                    {user.username}
                   </Box>
                 ))
               )}
