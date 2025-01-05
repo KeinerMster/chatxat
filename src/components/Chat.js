@@ -58,7 +58,8 @@ const Chat = () => {
   // Función para enviar el mensaje
   const sendMessage = () => {
     if (message.trim() !== "") {
-      setMessages((prevMessages) => [...prevMessages, message]); // Agregar el mensaje
+      const newMessage = { user: username, text: message }; // Crear un objeto de mensaje con el usuario y el texto
+      setMessages((prevMessages) => [...prevMessages, newMessage]); // Agregar el mensaje
       setMessage(""); // Limpiar el campo de mensaje
     }
   };
@@ -119,7 +120,7 @@ const Chat = () => {
                 <Box key={index} sx={{
                   padding: "8px", marginBottom: "5px", backgroundColor: "#f1f1f1", borderRadius: "12px", boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"
                 }}>
-                  {msg}
+                  <strong>{msg.user}:</strong> {msg.text}
                 </Box>
               ))}
             </Box>
@@ -171,7 +172,7 @@ const Chat = () => {
             <Box sx={{
               backgroundColor: "#3f51b5", color: "#fff", padding: "8px", borderRadius: "8px", marginBottom: "10px", textAlign: "center", fontSize: "16px", fontWeight: "bold"
             }}>
-              Sala de chat
+              Usuarios conectados
             </Box>
             <Box sx={{ padding: "5px", backgroundColor: "#f9f9f9", borderRadius: "8px", minHeight: "40px" }}>
               {users.length === 0 ? (
