@@ -169,18 +169,33 @@ const Chat = () => {
             width: "30%", padding: "5px", backgroundColor: "#fff", borderRadius: "12px", maxHeight: "500px", overflowY: "auto", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
           }}>
             {/* Banner de usuarios conectados */}
-            <Box sx={{
-              backgroundColor: "#3f51b5", color: "#fff", padding: "8px", borderRadius: "8px", marginBottom: "10px", textAlign: "center", fontSize: "16px", fontWeight: "bold"
-            }}>
-              Usuarios conectados
-            </Box>
-            <Box sx={{ padding: "5px", backgroundColor: "#f9f9f9", borderRadius: "8px", minHeight: "40px" }}>
+          <Box
+  sx={{
+    backgroundColor: "#3f51b5",
+    color: "#fff",
+    padding: "5px 10px",
+    borderRadius: "8px",
+    marginBottom: "5px",
+    textAlign: "center",
+    fontSize: "16px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    transition: "box-shadow 0.2s",
+    '&:hover': {
+      boxShadow: "0px 6px 8px rgba(0, 0, 0, 0.2)",
+    },
+  }}
+>
+  Chatea
+</Box>
+            <Box sx={{ padding: "5px", borderRadius: "8px", minHeight: "40px" }}>
               {users.length === 0 ? (
                 <Typography variant="body2">No hay usuarios conectados.</Typography>
               ) : (
                 users.map((user, index) => (
                   <Box key={index} sx={{
-                    padding: "4px", backgroundColor: "#e1e1e1", borderRadius: "8px", marginBottom: "5px"
+                    padding: "0px", borderRadius: "8px", marginBottom: "5px"
                   }}>
                     {user}
                   </Box>
