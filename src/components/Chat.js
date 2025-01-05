@@ -295,7 +295,7 @@ const Chat = () => {
                 color: "#fff",
                 padding: "5px 10px",
                 borderRadius: "8px",
-                marginTop: "2px", // Separación para que no se pegue al final de la lista
+                marginTop: "379px", // Separación para que no se pegue al final de la lista
                 textAlign: "center",
                 fontSize: "16px",
                 fontWeight: "bold",
